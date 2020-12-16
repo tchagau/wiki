@@ -28,10 +28,6 @@ def save_entry(title, content):
 
     default_storage.save(filename, ContentFile(content))
 
-    #try:
-     #   filename = f"entries/{title}.md"
-    #except FileExistsError:
-
 
 
 

@@ -44,9 +44,7 @@ def search(request):
         elif query in title:
             return render(request, "encyclopedia/search.html", { "entries": entries, "query": query})
             break
-        #else:
-         #   r = HttpResponse ("Entry not found")
-          #  break
+
     return HttpResponse ("Entry not found")
 
 # view to create new pages
