@@ -6,6 +6,7 @@ from django import forms
 
 import markdown2
 import random
+import re
 
 from . import util
 
@@ -37,16 +38,16 @@ def search(request):
     query = request.GET.get('q')
     entries = util.list_entries()
     for title in entries:
-        if query == title:
-            r = detail(request,title)
+        if (query.upper() == title or query.lower() == title or query.capitalize() == title):
+            return detail(request,title)
             break
         elif query in title:
-            r =  render(request, "encyclopedia/search.html", { "entries": entries, "query": query})
+            return render(request, "encyclopedia/search.html", { "entries": entries, "query": query})
             break
         #else:
-         #   return HttpResponse ("Entry not found")
-    
-    return r
+         #   r = HttpResponse ("Entry not found")
+          #  break
+    return HttpResponse ("Entry not found")
 
 # view to create new pages
 def new(request):
