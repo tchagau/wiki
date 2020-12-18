@@ -29,8 +29,13 @@ def index(request):
 
 # view to show the content of the entry
 def detail(request, title):
+    try:
+        gt = util.get_entry(title)
+    except:
+        return HttpResponse ("Page not found")
+        
     return render(request, "encyclopedia/title.html", {
-        "contenu": markdown2.markdown(util.get_entry(title)), "title": title
+        "contenu": markdown2.markdown(gt), "title": title
     })
 
 # view to show the page user searches for or the list of results
